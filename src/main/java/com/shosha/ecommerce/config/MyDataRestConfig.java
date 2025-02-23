@@ -1,7 +1,7 @@
-package com.luv2code.ecommerce.config;
+package com.shosha.ecommerce.config;
 
-import com.luv2code.ecommerce.entity.Product;
-import com.luv2code.ecommerce.entity.ProductCategory;
+import com.shosha.ecommerce.entity.Product;
+import com.shosha.ecommerce.entity.ProductCategory;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;

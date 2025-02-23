@@ -8,7 +8,7 @@
 		<version>2.7.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.luv2code</groupId>
+	<groupId>com.shosha.ecommerce</groupId>
 	<artifactId>spring-boot-ecommerce</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>spring-boot-ecommerce</name>

@@ -1,4 +1,4 @@
-package com.luv2code.ecommerce.entity;
+package com.shosha.ecommerce.entity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +8,6 @@ import java.util.Set;
 
 @Entity
 @Table(name="product_category")
-// @Data -- known bug
 @Getter
 @Setter
 public class ProductCategory {
