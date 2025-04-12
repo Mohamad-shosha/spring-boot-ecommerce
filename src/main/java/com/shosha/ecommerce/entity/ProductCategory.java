@@ -24,10 +24,3 @@ public class ProductCategory {
     private Set<Product> products;
 
 }
-
-
-
-
-
-
-
