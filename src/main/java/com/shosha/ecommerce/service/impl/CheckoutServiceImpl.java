@@ -2,11 +2,11 @@ package com.shosha.ecommerce.service.impl;
 
 import com.shosha.ecommerce.dto.Purchase;
 import com.shosha.ecommerce.dto.PurchaseResponse;
-import com.shosha.ecommerce.entity.Customer;
+import com.shosha.ecommerce.dto.CustomerDTO;
 import com.shosha.ecommerce.entity.Order;
 import com.shosha.ecommerce.entity.OrderItem;
 import com.shosha.ecommerce.service.CheckoutService;
-import com.shosha.ecommerce.service.CustomerService;
+import com.shosha.ecommerce.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,15 +18,15 @@ import java.util.UUID;
 @Service
 public class CheckoutServiceImpl implements CheckoutService {
 
-    private final CustomerService customerService;
+    private final UserService userService;
 
-    public CheckoutServiceImpl(final CustomerService customerService) {
-        this.customerService = customerService;
+    public CheckoutServiceImpl(UserService userService) {
+        this.userService = userService;
     }
 
     @Override
     @Transactional
-    public PurchaseResponse placeOrder(final Purchase purchase) {
+    public PurchaseResponse placeOrder(Purchase purchase) {
         Order order = purchase.getOrder();
         String orderTrackingNumber = generateOrderTrackingNumber();
         order.setOrderTrackingNumber(orderTrackingNumber);
@@ -37,10 +37,10 @@ public class CheckoutServiceImpl implements CheckoutService {
         order.setBillingAddress(purchase.getBillingAddress());
         order.setShippingAddress(purchase.getShippingAddress());
 
-        Customer customer = purchase.getCustomer();
+        CustomerDTO customer = purchase.getCustomer();
         customer.addOrder(order);
 
-        customerService.save(customer);
+        userService.save(customer);
 
         log.info("Order placed successfully with tracking number: {}", orderTrackingNumber);
         return new PurchaseResponse(orderTrackingNumber);
