@@ -1,5 +1,7 @@
 package com.shosha.ecommerce.entity;
 
+import com.shosha.ecommerce.dto.CustomerDTO;
+import com.shosha.ecommerce.service.mapper.UserMapper;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -47,7 +49,7 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
-    private Customer customer;
+    private User customer;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "shipping_address_id", referencedColumnName = "id")
