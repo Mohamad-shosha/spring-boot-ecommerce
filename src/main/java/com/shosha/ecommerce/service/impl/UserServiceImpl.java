@@ -63,6 +63,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<UserDTO> getByRole(Role role) {
-        return userRepository.getUserByRole(role.name()).map(userMapper::toDto);
+        return userRepository.getUserByRole(role).map(userMapper::toDto);
     }
 }
