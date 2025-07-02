@@ -17,4 +17,5 @@ public interface UserService {
 
     UserDetailsService userDetailsService();
 
+    Optional<UserDTO> getByRole(Role role);
 }

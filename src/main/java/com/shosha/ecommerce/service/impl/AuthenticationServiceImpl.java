@@ -41,7 +41,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         // Hash the password first
         signUpRequestDTO.setPassword(passwordEncoder.encode(signUpRequestDTO.getPassword()));
         UserDTO userDTO = new UserDTO(signUpRequestDTO);
-        userDTO.setRole(Role.CUSTOMER);
+        userDTO.setRole(Role.CUSTOMER.name());
         return userService.save(userDTO);
     }
 

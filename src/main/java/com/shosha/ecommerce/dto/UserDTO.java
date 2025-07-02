@@ -16,7 +16,7 @@ public class UserDTO {
     @JsonIgnore
     private String password;
 
-    private Role role;
+    private String role;
 
     public UserDTO() {
     }
@@ -26,7 +26,7 @@ public class UserDTO {
                        String lastName,
                        String email,
                        String password,
-                       Role role) {
+                       String role) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -40,7 +40,7 @@ public class UserDTO {
         setLastName(signUpRequestDTO.getLastName());
         setEmail(signUpRequestDTO.getEmail());
         setPassword(signUpRequestDTO.getPassword());
-        setRole(Role.CUSTOMER);
+        setRole(Role.CUSTOMER.name());
     }
 
     public Long getId() {
@@ -83,11 +83,11 @@ public class UserDTO {
         this.password = password;
     }
 
-    public Role getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(String role) {
         this.role = role;
     }
 

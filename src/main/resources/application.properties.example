@@ -9,3 +9,5 @@ spring.data.rest.base-path=/api
 
 frontend.url=http://localhost:4200
 jwt.secret=DJnBFEwL1hcDMbgNJNDAWa97Z7R2aTlLAZcV++BBKLpCGclZmptykjWOdk5MG3784usqvQm53wYbpdUJViMLFA==
+
+admin.password=Fares@2002

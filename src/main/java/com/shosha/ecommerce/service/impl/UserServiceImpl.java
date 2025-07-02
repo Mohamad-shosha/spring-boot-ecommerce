@@ -3,6 +3,7 @@ package com.shosha.ecommerce.service.impl;
 import com.shosha.ecommerce.dao.UserRepository;
 import com.shosha.ecommerce.dto.UserDTO;
 import com.shosha.ecommerce.entity.User;
+import com.shosha.ecommerce.entity.enums.Role;
 import com.shosha.ecommerce.service.UserService;
 import com.shosha.ecommerce.service.mapper.UserMapper;
 import org.slf4j.Logger;
@@ -58,5 +59,10 @@ public class UserServiceImpl implements UserService {
                         .orElseThrow(() -> new UsernameNotFoundException("User not found"));
             }
         };
+    }
+
+    @Override
+    public Optional<UserDTO> getByRole(Role role) {
+        return userRepository.getUserByRole(role.name()).map(userMapper::toDto);
     }
 }
