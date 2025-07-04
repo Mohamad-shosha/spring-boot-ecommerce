@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.shosha.ecommerce.entity.enums.Role;
 import lombok.Data;
 
-@Data
 public class UserDTO {
     private Long id;
 
@@ -17,7 +16,7 @@ public class UserDTO {
     @JsonIgnore
     private String password;
 
-    private Role role;
+    private String role;
 
     public UserDTO() {
     }
@@ -27,7 +26,7 @@ public class UserDTO {
                        String lastName,
                        String email,
                        String password,
-                       Role role) {
+                       String role) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -41,7 +40,55 @@ public class UserDTO {
         setLastName(signUpRequestDTO.getLastName());
         setEmail(signUpRequestDTO.getEmail());
         setPassword(signUpRequestDTO.getPassword());
-        setRole(Role.CUSTOMER);
+        setRole(Role.CUSTOMER.name());
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     @Override

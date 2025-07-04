@@ -3,6 +3,7 @@ package com.shosha.ecommerce.service.impl;
 import com.shosha.ecommerce.dao.UserRepository;
 import com.shosha.ecommerce.dto.UserDTO;
 import com.shosha.ecommerce.entity.User;
+import com.shosha.ecommerce.entity.enums.Role;
 import com.shosha.ecommerce.service.UserService;
 import com.shosha.ecommerce.service.mapper.UserMapper;
 import org.slf4j.Logger;
@@ -54,11 +55,6 @@ public class UserServiceImpl implements UserService {
         return username -> {
             User user = userRepository.findByEmail(username)
                     .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-
-            // ✅ سجل الإيميل والسلطات
-            System.out.println("🧾 User: " + user.getEmail());
-            System.out.println("🎯 Authorities: " + user.getAuthorities());
-
             return new org.springframework.security.core.userdetails.User(
                     user.getEmail(),
                     user.getPassword(),
@@ -66,13 +62,9 @@ public class UserServiceImpl implements UserService {
             );
         };
     }
-<<<<<<< Updated upstream
-=======
-
 
     @Override
     public Optional<UserDTO> getByRole(Role role) {
         return userRepository.getUserByRole(role).map(userMapper::toDto);
     }
->>>>>>> Stashed changes
 }

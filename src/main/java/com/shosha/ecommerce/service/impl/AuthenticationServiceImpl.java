@@ -1,6 +1,7 @@
 package com.shosha.ecommerce.service.impl;
 
 import com.shosha.ecommerce.dto.*;
+import com.shosha.ecommerce.entity.enums.Role;
 import com.shosha.ecommerce.service.AuthenticationService;
 import com.shosha.ecommerce.service.JWTService;
 import com.shosha.ecommerce.service.UserService;
@@ -40,6 +41,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         // Hash the password first
         signUpRequestDTO.setPassword(passwordEncoder.encode(signUpRequestDTO.getPassword()));
         UserDTO userDTO = new UserDTO(signUpRequestDTO);
+        userDTO.setRole(Role.CUSTOMER.name());
         return userService.save(userDTO);
     }
 
