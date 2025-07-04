@@ -51,12 +51,28 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetailsService userDetailsService() {
-        return new UserDetailsService() {
-            @Override
-            public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-                return userRepository.findByEmail(username)
-                        .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-            }
+        return username -> {
+            User user = userRepository.findByEmail(username)
+                    .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+            // ✅ سجل الإيميل والسلطات
+            System.out.println("🧾 User: " + user.getEmail());
+            System.out.println("🎯 Authorities: " + user.getAuthorities());
+
+            return new org.springframework.security.core.userdetails.User(
+                    user.getEmail(),
+                    user.getPassword(),
+                    user.getAuthorities()
+            );
         };
     }
+<<<<<<< Updated upstream
+=======
+
+
+    @Override
+    public Optional<UserDTO> getByRole(Role role) {
+        return userRepository.getUserByRole(role).map(userMapper::toDto);
+    }
+>>>>>>> Stashed changes
 }
