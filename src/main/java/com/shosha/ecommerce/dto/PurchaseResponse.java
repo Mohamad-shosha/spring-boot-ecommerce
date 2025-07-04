@@ -1,8 +1,19 @@
 package com.shosha.ecommerce.dto;
 
-import lombok.Data;
+import java.io.Serializable;
 
-@Data
-public class PurchaseResponse {
-    private final String orderTrackingNumber;
+public class PurchaseResponse implements Serializable {
+    private String orderTrackingNumber;
+
+    public PurchaseResponse(String orderTrackingNumber) {
+        this.orderTrackingNumber = orderTrackingNumber;
+    }
+
+    public String getOrderTrackingNumber() {
+        return orderTrackingNumber;
+    }
+
+    public void setOrderTrackingNumber(String orderTrackingNumber) {
+        this.orderTrackingNumber = orderTrackingNumber;
+    }
 }

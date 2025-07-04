@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -66,5 +67,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<UserDTO> getByRole(Role role) {
         return userRepository.getUserByRole(role).map(userMapper::toDto);
+    }
+
+    @Override
+    public List<UserDTO> getAllCustomers() {
+        return userRepository.findAllByRole(Role.CUSTOMER).stream().map(userMapper::toDto).toList();
     }
 }

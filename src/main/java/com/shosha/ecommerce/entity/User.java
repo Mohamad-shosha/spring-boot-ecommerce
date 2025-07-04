@@ -35,7 +35,9 @@ public class User implements UserDetails {
     @Column(name = "role")
     private Role role;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customer",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
     private Set<Order> orders;
 
     public User() {

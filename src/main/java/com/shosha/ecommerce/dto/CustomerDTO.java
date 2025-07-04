@@ -8,7 +8,7 @@ import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
-public class CustomerDTO extends UserDTO{
+public class CustomerDTO extends UserDTO {
 
     private Set<Order> orders;
 

@@ -1,35 +1,13 @@
-package com.shosha.ecommerce.entity;
+package com.shosha.ecommerce.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-
-import javax.persistence.*;
 import java.math.BigDecimal;
 
-@Entity
-@Table(name= "order_item")
-public class OrderItem {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+public class OrderItemDTO {
     private Long id;
-
-    @Column(name="image_url")
     private String imageUrl;
-
-    @Column(name="unit_price")
     private BigDecimal unitPrice;
-
-    @Column(name="quantity")
     private int quantity;
-
-    @Column(name="product_id")
     private Long productId;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "order_id")
-    private Order order;
 
     public Long getId() {
         return id;
@@ -69,13 +47,5 @@ public class OrderItem {
 
     public void setProductId(Long productId) {
         this.productId = productId;
-    }
-
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
     }
 }

@@ -5,6 +5,7 @@ import com.shosha.ecommerce.dto.UserDTO;
 import com.shosha.ecommerce.entity.enums.Role;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
@@ -18,4 +19,6 @@ public interface UserService {
     UserDetailsService userDetailsService();
 
     Optional<UserDTO> getByRole(Role role);
+
+    List<UserDTO> getAllCustomers();
 }

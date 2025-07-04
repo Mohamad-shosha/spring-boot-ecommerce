@@ -1,10 +1,7 @@
 package com.shosha.ecommerce.service.mapper;
 
 
-import org.mapstruct.BeanMapping;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.Named;
-import org.mapstruct.NullValuePropertyMappingStrategy;
+import com.shosha.ecommerce.dto.CanceledOrderDTO;
 
 import java.util.List;
 

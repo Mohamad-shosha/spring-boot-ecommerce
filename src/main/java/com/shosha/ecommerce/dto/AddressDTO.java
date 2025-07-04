@@ -1,35 +1,13 @@
-package com.shosha.ecommerce.entity;
+package com.shosha.ecommerce.dto;
 
+public class AddressDTO {
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "address")
-public class Address {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
-
-    @Column(name="street")
     private String street;
-
-    @Column(name="city")
     private String city;
-
-    @Column(name="state")
     private String state;
-
-    @Column(name="country")
     private String country;
-
-    @Column(name="zip_code")
     private String zipCode;
-
-    @OneToOne
-    @PrimaryKeyJoinColumn
-    private Order order;
 
     public Long getId() {
         return id;
@@ -77,13 +55,5 @@ public class Address {
 
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
-    }
-
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
     }
 }
