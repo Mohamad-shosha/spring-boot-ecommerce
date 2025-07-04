@@ -38,10 +38,15 @@ public class Order {
     @UpdateTimestamp
     private Date updatedAt;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToMany(
+            mappedBy = "order",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY
+    )
     private Set<OrderItem> orderItems;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
     private User customer;
 
@@ -52,14 +57,6 @@ public class Order {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "billing_address_id", referencedColumnName = "id")
     private Address billingAddress;
-
-    public void addOrderItem(OrderItem orderItem) {
-        if (orderItems == null) {
-            orderItems = new HashSet<OrderItem>();
-        }
-        orderItems.add(orderItem);
-        orderItem.setOrder(this);
-    }
 
     public Long getId() {
         return id;
@@ -147,6 +144,19 @@ public class Order {
 
     public void setBillingAddress(Address billingAddress) {
         this.billingAddress = billingAddress;
+    }
+
+    public void addItem(OrderItem item) {
+        if (orderItems==null) {
+            orderItems = new HashSet<>();
+        }
+        orderItems.add(item);
+        item.setOrder(this);
+    }
+
+    public void removeItem(OrderItem item) {
+        orderItems.remove(item);
+        item.setOrder(null);
     }
 }
 

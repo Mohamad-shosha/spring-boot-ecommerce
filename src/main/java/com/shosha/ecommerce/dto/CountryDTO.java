@@ -1,24 +1,12 @@
-package com.shosha.ecommerce.entity;
+package com.shosha.ecommerce.dto;
 
-import javax.persistence.*;
 import java.util.List;
 
-@Entity
-@Table(name = "country")
-public class Country {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+public class CountryDTO {
     private int id;
-
-    @Column(name = "code")
     private String code;
-
-    @Column(name = "name")
     private String name;
-
-    @OneToMany(mappedBy = "country")
-    private List<State> states;
+    private List<StateDTO> states;
 
     public int getId() {
         return id;
@@ -44,11 +32,11 @@ public class Country {
         this.name = name;
     }
 
-    public List<State> getStates() {
+    public List<StateDTO> getStates() {
         return states;
     }
 
-    public void setStates(List<State> states) {
+    public void setStates(List<StateDTO> states) {
         this.states = states;
     }
 }

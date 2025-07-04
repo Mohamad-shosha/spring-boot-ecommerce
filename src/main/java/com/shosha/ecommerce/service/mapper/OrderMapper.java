@@ -10,11 +10,10 @@ import java.util.List;
 
 @Mapper(
         componentModel = "spring",
-        uses = { UserMapper.class, AddressMapper.class, OrderItemMapper.class }
+        uses = { AddressMapper.class, OrderItemMapper.class }
 )
 public interface OrderMapper {
 
-    @Mapping(target = "customer",         source = "customer")
     @Mapping(target = "shippingAddress",  source = "shippingAddress")
     @Mapping(target = "billingAddress",   source = "billingAddress")
     @Mapping(target = "orderItems",       source = "orderItems")

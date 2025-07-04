@@ -2,7 +2,7 @@ package com.shosha.ecommerce.entity.enums;
 
 public enum OrderStatus {
     PENDING,         // Order created but not confirmed yet
-    CONFIRMED,       // Payment confirmed or order accepted
+    CONFIRMED,       // Payment confirmed
     PROCESSING,      // Order being prepared/packed
     SHIPPED,         // Order has been handed to courier
     DELIVERED,       // Order successfully delivered

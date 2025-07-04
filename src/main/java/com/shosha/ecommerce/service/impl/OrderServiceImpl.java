@@ -5,13 +5,16 @@ import java.util.List;
 import java.util.Optional;
 
 import com.shosha.ecommerce.dao.OrderRepository;
-import com.shosha.ecommerce.dto.CancelOrderRequestDTO;
+import com.shosha.ecommerce.dto.CanceledOrderDTO;
 import com.shosha.ecommerce.dto.OrderDTO;
 import com.shosha.ecommerce.dto.UpdateOrderInfoRequestDTO;
+import com.shosha.ecommerce.dto.UserDTO;
 import com.shosha.ecommerce.entity.Order;
 import com.shosha.ecommerce.entity.enums.OrderStatus;
+import com.shosha.ecommerce.service.CanceledOrderService;
 import com.shosha.ecommerce.service.OrderService;
 import com.shosha.ecommerce.service.mapper.OrderMapper;
+import com.shosha.ecommerce.service.util.SecurityUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -24,11 +27,14 @@ public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
     private final OrderMapper orderMapper;
+    private final CanceledOrderService canceledOrderService;
 
     public OrderServiceImpl(OrderRepository orderRepository,
-                            OrderMapper orderMapper) {
+                            OrderMapper orderMapper,
+                            CanceledOrderService canceledOrderService) {
         this.orderRepository = orderRepository;
         this.orderMapper = orderMapper;
+        this.canceledOrderService = canceledOrderService;
     }
 
     @Override
@@ -68,7 +74,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderDTO> findAllByCustomerId(Long customerId) {
+    public List<OrderDTO> getCustomerOrders(Long customerId) {
         return orderRepository.findAllByCustomerId(customerId).stream().map(orderMapper::toDto).toList();
     }
 
@@ -86,17 +92,25 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void cancelOrder(CancelOrderRequestDTO cancelOrderRequestDTO) {
-        log.debug("Request to cancel order : {}", cancelOrderRequestDTO);
-        Long id = cancelOrderRequestDTO.getOrderId();
-        Optional<OrderDTO> dbOrder = findOne(id);
-
-        if(cancelOrderRequestDTO.getOrderId()==null || dbOrder.isEmpty()) {
-            throw new IllegalArgumentException("Cannot cancel; order not found (id=" + id + ")");
+    public void cancelOrder(CanceledOrderDTO canceledOrderDTO) {
+        log.debug("Request to cancel order : {}", canceledOrderDTO);
+        UserDTO currentUser = SecurityUtil.getCurrentUser();
+        assert currentUser != null;
+        Long orderId = canceledOrderDTO.getOrderId();
+        if(canceledOrderDTO.getOrderId()==null) {
+            throw new IllegalArgumentException("Cannot cancel; order not found (id=" + orderId + ")");
         }
+        orderRepository.updateStatus(orderId, OrderStatus.CANCELLED.name());
+        canceledOrderDTO.setUserId(currentUser.getId());
+        canceledOrderService.save(canceledOrderDTO);
+    }
 
-        OrderDTO orderDTO = dbOrder.get();
-        orderDTO.setStatus(OrderStatus.CANCELLED.name());
+    @Override
+    public OrderDTO restoreOrder(Long orderId) {
+        CanceledOrderDTO canceledOrderDTO = canceledOrderService.findByOrderId(orderId).orElseThrow();
+        orderRepository.updateStatus(orderId, canceledOrderDTO.getLastStatus());
+        canceledOrderService.delete(canceledOrderDTO.getId());
+        return findOne(orderId).orElseThrow();
     }
 
     @Override

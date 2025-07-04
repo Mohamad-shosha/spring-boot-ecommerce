@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Set;
 
-
 public class OrderDTO {
 
     private Long id;
@@ -14,7 +13,6 @@ public class OrderDTO {
     private String status;
     private Date createdAt;
     private Date updatedAt;
-    private CustomerDTO customer;
     private AddressDTO shippingAddress;
     private AddressDTO billingAddress;
     private Set<OrderItemDTO> orderItems;
@@ -73,14 +71,6 @@ public class OrderDTO {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public CustomerDTO getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(CustomerDTO customer) {
-        this.customer = customer;
     }
 
     public AddressDTO getShippingAddress() {
