@@ -5,6 +5,7 @@ import com.shosha.ecommerce.dto.PurchaseResponse;
 import com.shosha.ecommerce.dto.CustomerDTO;
 import com.shosha.ecommerce.entity.Order;
 import com.shosha.ecommerce.entity.OrderItem;
+import com.shosha.ecommerce.entity.enums.OrderStatus;
 import com.shosha.ecommerce.service.CheckoutService;
 import com.shosha.ecommerce.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -36,6 +37,7 @@ public class CheckoutServiceImpl implements CheckoutService {
 
         order.setBillingAddress(purchase.getBillingAddress());
         order.setShippingAddress(purchase.getShippingAddress());
+        order.setStatus(OrderStatus.PENDING.name());
 
         CustomerDTO customer = purchase.getCustomer();
         customer.addOrder(order);
