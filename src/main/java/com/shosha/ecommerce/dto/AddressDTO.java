@@ -1,6 +1,8 @@
 package com.shosha.ecommerce.dto;
 
-public class AddressDTO {
+import java.io.Serializable;
+
+public class AddressDTO implements Serializable {
 
     private Long id;
     private String street;

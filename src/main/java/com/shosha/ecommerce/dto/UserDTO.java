@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.shosha.ecommerce.entity.enums.Role;
 import lombok.Data;
 
-public class UserDTO {
+import java.io.Serializable;
+
+public class UserDTO implements Serializable {
     private Long id;
 
     private String firstName;

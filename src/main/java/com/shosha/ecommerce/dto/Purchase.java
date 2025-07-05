@@ -5,9 +5,10 @@ import com.shosha.ecommerce.entity.Order;
 import com.shosha.ecommerce.entity.OrderItem;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Set;
 
-public class Purchase {
+public class Purchase implements Serializable {
     private CustomerDTO customer;
     private Order order;
     private Address shippingAddress;

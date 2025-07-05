@@ -4,6 +4,7 @@ import com.shosha.ecommerce.dto.CanceledOrderDTO;
 import com.shosha.ecommerce.dto.OrderDTO;
 import com.shosha.ecommerce.dto.UpdateOrderInfoRequestDTO;
 import com.shosha.ecommerce.dto.UserDTO;
+import com.shosha.ecommerce.entity.enums.OrderStatus;
 import com.shosha.ecommerce.service.CanceledOrderService;
 import com.shosha.ecommerce.service.OrderService;
 import com.shosha.ecommerce.service.util.SecurityUtil;
@@ -59,5 +60,11 @@ public class CustomerController {
     @PutMapping("/orders/restore")
     public ResponseEntity<?> reorder(@RequestParam("orderId") Long orderId) {
         return ResponseEntity.ok(orderService.restoreOrder(orderId));
+    }
+
+    @GetMapping("/orders/{otn}/status")
+    public ResponseEntity<String> getOrderStatus(@PathVariable String otn) {
+        OrderDTO orderDTO = orderService.getOrderByOrderTrackingNumber(otn).orElse(null);
+        return ResponseEntity.ok().body(orderDTO.getStatus());
     }
 }

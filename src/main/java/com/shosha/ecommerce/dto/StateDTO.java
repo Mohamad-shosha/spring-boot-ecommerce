@@ -1,6 +1,8 @@
 package com.shosha.ecommerce.dto;
 
-public class StateDTO {
+import java.io.Serializable;
+
+public class StateDTO implements Serializable {
     private int id;
     private String name;
     private int countryId;

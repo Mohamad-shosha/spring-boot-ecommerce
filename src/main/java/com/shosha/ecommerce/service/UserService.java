@@ -20,5 +20,7 @@ public interface UserService {
 
     Optional<UserDTO> getByRole(Role role);
 
+    Optional<UserDTO> getByEmail(String email);
+
     List<UserDTO> getAllCustomers();
 }

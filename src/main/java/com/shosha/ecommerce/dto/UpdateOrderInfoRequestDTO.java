@@ -1,6 +1,8 @@
 package com.shosha.ecommerce.dto;
 
-public class UpdateOrderInfoRequestDTO {
+import java.io.Serializable;
+
+public class UpdateOrderInfoRequestDTO implements Serializable {
 
     private Long orderId;
     private AddressDTO shippingAddress;
