@@ -26,4 +26,16 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
         WHERE o.id = :orderId
        """)
     int updateStatus(@Param("orderId") Long orderId, @Param("status") String status);
+
+    List<Order> getAllByStatus(String status);
+
+    @Transactional
+    @Modifying
+    @Query("""
+        UPDATE Order o
+        SET o.status = :status
+        WHERE o.status = :prevStatus
+       """)
+    int updateStatusByPrevStatus(@Param("status") String prevStatus, @Param("status") String status);
+
 }

@@ -1,8 +1,9 @@
 package com.shosha.ecommerce.dto;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class OrderItemDTO {
+public class OrderItemDTO implements Serializable {
     private Long id;
     private String imageUrl;
     private BigDecimal unitPrice;

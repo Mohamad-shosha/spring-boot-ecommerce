@@ -3,8 +3,9 @@ package com.shosha.ecommerce.dto;
 import com.shosha.ecommerce.service.annotations.UniqueEmail;
 
 import javax.validation.constraints.*;
+import java.io.Serializable;
 
-public class SignUpRequestDTO {
+public class SignUpRequestDTO implements Serializable {
 
     @NotBlank(message = "is required")
     private String firstName;

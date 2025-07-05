@@ -3,6 +3,7 @@ package com.shosha.ecommerce.service.impl;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.shosha.ecommerce.dao.OrderRepository;
 import com.shosha.ecommerce.dto.CanceledOrderDTO;
@@ -92,6 +93,16 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public List<OrderDTO> getAllConfirmedOrders() {
+        return orderRepository.getAllByStatus(OrderStatus.CONFIRMED.name()).stream().map(orderMapper::toDto).toList();
+    }
+
+    @Override
+    public List<OrderDTO> getAllProcessingOrders() {
+        return orderRepository.getAllByStatus(OrderStatus.PROCESSING.name()).stream().map(orderMapper::toDto).toList();
+    }
+
+    @Override
     public void cancelOrder(CanceledOrderDTO canceledOrderDTO) {
         log.debug("Request to cancel order : {}", canceledOrderDTO);
         UserDTO currentUser = SecurityUtil.getCurrentUser();
@@ -114,12 +125,18 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public void updateOrderStatus(Long orderId, String status) {
+        orderRepository.updateStatus(orderId, status);
+    }
+
+    @Override
     public void delete(Long id) {
         if (!orderRepository.existsById(id)) {
             throw new IllegalArgumentException("Cannot delete; order not found (id=" + id + ")");
         }
         orderRepository.deleteById(id);
     }
+
 
 
 }

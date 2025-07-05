@@ -35,15 +35,23 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(requests ->
-                        requests.antMatchers("/api/auth/**").permitAll()
+                        requests
+                                // Public endpoints
+                                .antMatchers("/api/auth/**").permitAll()
                                 .antMatchers("/api/products/**").permitAll()
                                 .antMatchers("/api/product-category/**").permitAll()
                                 .antMatchers("/api/countries/**").permitAll()
                                 .antMatchers("/api/states/**").permitAll()
                                 .antMatchers("/api/address/**").permitAll()
+
+                                // Role-based access
                                 .antMatchers("/api/checkout/**").hasAuthority(Role.CUSTOMER.name())
                                 .antMatchers("/api/customer/**").hasAuthority(Role.CUSTOMER.name())
                                 .antMatchers("/api/admin/**").hasAuthority(Role.ADMIN.name())
+                                .antMatchers("/api/inventory/**").hasAnyAuthority(Role.ADMIN.name(), Role.INVENTORY_MANAGER.name())
+                                .antMatchers("/api/orders/**").hasAnyAuthority(Role.ADMIN.name(), Role.ORDER_OFFICER.name())
+
+                                // Fallback: authenticated users only
                                 .anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())

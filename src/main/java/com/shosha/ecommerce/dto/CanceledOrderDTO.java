@@ -1,6 +1,8 @@
 package com.shosha.ecommerce.dto;
 
-public class CanceledOrderDTO {
+import java.io.Serializable;
+
+public class CanceledOrderDTO implements Serializable {
     private Long id;
     private Long orderId;
     private String reason;

@@ -1,6 +1,8 @@
 package com.shosha.ecommerce.dto;
 
-public class JwtAuthenticationResponse {
+import java.io.Serializable;
+
+public class JwtAuthenticationResponse implements Serializable {
 
     private String accessToken;
 

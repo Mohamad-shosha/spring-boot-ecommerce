@@ -1,8 +1,9 @@
 package com.shosha.ecommerce.dto;
 
 import javax.validation.constraints.*;
+import java.io.Serializable;
 
-public class SignInRequestDTO {
+public class SignInRequestDTO implements Serializable {
 
     @NotBlank(message = "is required")
     @Email(message = "Invalid email format")

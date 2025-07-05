@@ -1,6 +1,8 @@
 package com.shosha.ecommerce.dto;
 
-public class RefreshTokenRequestDTO {
+import java.io.Serializable;
+
+public class RefreshTokenRequestDTO implements Serializable {
     private String refreshToken;
 
     public String getRefreshToken() {

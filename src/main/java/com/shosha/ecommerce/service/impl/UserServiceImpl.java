@@ -66,7 +66,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<UserDTO> getByRole(Role role) {
+
         return userRepository.getUserByRole(role).map(userMapper::toDto);
+    }
+
+    @Override
+    public Optional<UserDTO> getByEmail(String email) {
+        return userRepository.getUserByEmail(email).map(userMapper::toDto);
     }
 
     @Override

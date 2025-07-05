@@ -1,10 +1,11 @@
 package com.shosha.ecommerce.dto;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Set;
 
-public class OrderDTO {
+public class OrderDTO implements Serializable {
 
     private Long id;
     private String orderTrackingNumber;
