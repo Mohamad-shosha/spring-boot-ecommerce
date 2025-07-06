@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  mysqldb:
+    image: mysql:8
+    container_name: mysql-container
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: <root_pass>
+      MYSQL_DATABASE: full-stack-ecommerce
+      MYSQL_USER: <username>
+      MYSQL_PASSWORD: <password>
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - ecom_network
+
+  ecom-app:
+    build: ../
+    depends_on:
+      - mysqldb
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/full-stack-ecommerce
+      SPRING_DATASOURCE_USERNAME: your_DB_Username
+      SPRING_DATASOURCE_PASSWORD: your_DB_Password
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.MySQL8Dialect
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_DATA_REST_BASE_PATH: /api
+      FRONTEND_URL: http://localhost:4200
+      JWT_SECRET: DJnBFEwL1hcDMbgNJNDAWa97Z7R2aTlLAZcV++BBKLpCGclZmptykjWOdk5MG3784usqvQm53wYbpdUJViMLFA==
+      ADMIN_PASSWORD: Fares@2002
+
+      #Add other application properties here...
+
+    networks:
+      - ecom_network #Add this to other microservice for them to be discoverable and show up within the same container
+
+
+volumes:
+  mysql_data:
+
+networks:
+  ecom_network:
+    name: ecom_network
+
