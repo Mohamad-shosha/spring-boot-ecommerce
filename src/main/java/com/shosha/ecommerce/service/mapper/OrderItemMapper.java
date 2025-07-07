@@ -9,7 +9,7 @@ import org.mapstruct.Mapping;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-public interface OrderItemMapper {
+public interface OrderItemMapper extends EntityMapper<OrderItemDTO, OrderItem> {
 
     @Mapping(target = "id",         source = "id")
     @Mapping(target = "imageUrl",   source = "imageUrl")

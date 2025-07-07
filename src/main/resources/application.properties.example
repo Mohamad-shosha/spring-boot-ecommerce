@@ -11,3 +11,11 @@ frontend.url=http://localhost:4200
 jwt.secret=DJnBFEwL1hcDMbgNJNDAWa97Z7R2aTlLAZcV++BBKLpCGclZmptykjWOdk5MG3784usqvQm53wYbpdUJViMLFA==
 
 admin.password=Fares@2002
+
+nlp.base-url=https://endless-maggot-current.ngrok-free.app
+nlp.version=1
+nlp.username=admin
+nlp.password=admin
+nlp.process.chunk.size=500
+nlp.process.overlap.size=50
+nlp.process.reset=1

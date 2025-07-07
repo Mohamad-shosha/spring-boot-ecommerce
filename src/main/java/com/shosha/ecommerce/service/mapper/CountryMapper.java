@@ -7,7 +7,7 @@ import org.mapstruct.*;
 import java.util.List;
 
 @Mapper(componentModel = "spring", uses = StateMapper.class)
-public interface CountryMapper {
+public interface CountryMapper extends EntityMapper<CountryDTO, Country> {
 
     CountryDTO toDto(Country country);
 

@@ -36,6 +36,6 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
         SET o.status = :status
         WHERE o.status = :prevStatus
        """)
-    int updateStatusByPrevStatus(@Param("status") String prevStatus, @Param("status") String status);
+    int updateStatusByPrevStatus(@Param("prevStatus") String prevStatus, @Param("status") String status);
 
 }

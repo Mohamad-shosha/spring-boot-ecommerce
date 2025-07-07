@@ -12,7 +12,7 @@ import java.util.List;
         componentModel = "spring",
         uses = { AddressMapper.class, OrderItemMapper.class }
 )
-public interface OrderMapper {
+public interface OrderMapper extends EntityMapper<OrderDTO, Order> {
 
     @Mapping(target = "shippingAddress",  source = "shippingAddress")
     @Mapping(target = "billingAddress",   source = "billingAddress")
