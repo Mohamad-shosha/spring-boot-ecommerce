@@ -3,7 +3,6 @@ package com.shosha.ecommerce.service.impl;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import com.shosha.ecommerce.dao.OrderRepository;
 import com.shosha.ecommerce.dto.CanceledOrderDTO;
@@ -108,11 +107,13 @@ public class OrderServiceImpl implements OrderService {
         UserDTO currentUser = SecurityUtil.getCurrentUser();
         assert currentUser != null;
         Long orderId = canceledOrderDTO.getOrderId();
-        if(canceledOrderDTO.getOrderId()==null) {
+        Optional<OrderDTO> order = findOne(orderId);
+        if(canceledOrderDTO.getOrderId()==null || order.isEmpty()) {
             throw new IllegalArgumentException("Cannot cancel; order not found (id=" + orderId + ")");
         }
         orderRepository.updateStatus(orderId, OrderStatus.CANCELLED.name());
         canceledOrderDTO.setUserId(currentUser.getId());
+        canceledOrderDTO.setLastStatus(order.get().getStatus());
         canceledOrderService.save(canceledOrderDTO);
     }
 

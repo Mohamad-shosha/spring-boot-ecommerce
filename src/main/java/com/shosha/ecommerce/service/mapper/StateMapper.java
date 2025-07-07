@@ -7,7 +7,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
-public interface StateMapper {
+public interface StateMapper extends EntityMapper<StateDTO, State> {
 
     @Mapping(source = "country.id", target = "countryId")
     StateDTO toDto(State state);
