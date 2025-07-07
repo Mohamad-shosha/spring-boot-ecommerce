@@ -44,6 +44,7 @@ public class SecurityConfiguration {
                                 .antMatchers("/api/states/**").permitAll()
                                 .antMatchers("/api/address/**").permitAll()
                                 .antMatchers("/api/chatbot/**").permitAll()
+                                .antMatchers("/api/vdr/**").permitAll()
 
                                 // Role-based access
                                 .antMatchers("/api/checkout/**").hasAuthority(Role.CUSTOMER.name())
