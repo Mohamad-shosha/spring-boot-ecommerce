@@ -104,6 +104,7 @@ public class FAQsServiceImpl implements FAQsService {
                 .append("</div>");
 
         faqsDTO.setAnswer(answer.toString());
+
         return faqsDTO;
     }
 
