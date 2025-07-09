@@ -17,7 +17,7 @@ public class SecurityUtil {
 
     public static UserDTO getCurrentUser() {
         var authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication == null || !authentication.isAuthenticated()) {
+        if (authentication == null || !authentication.isAuthenticated() || authentication.getPrincipal().toString().equals("anonymousUser")) {
             return null;
         }
         String email = authentication.getName();

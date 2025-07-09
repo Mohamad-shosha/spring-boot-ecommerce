@@ -19,3 +19,5 @@ nlp.password=admin
 nlp.process.chunk.size=500
 nlp.process.overlap.size=50
 nlp.process.reset=1
+
+vdr.base-url=https://sturgeon-handy-uniquely.ngrok-free.app

@@ -4,7 +4,6 @@ import com.shosha.ecommerce.dto.CanceledOrderDTO;
 import com.shosha.ecommerce.dto.OrderDTO;
 import com.shosha.ecommerce.dto.UpdateOrderInfoRequestDTO;
 import com.shosha.ecommerce.dto.UserDTO;
-import com.shosha.ecommerce.entity.enums.OrderStatus;
 import com.shosha.ecommerce.service.CanceledOrderService;
 import com.shosha.ecommerce.service.OrderService;
 import com.shosha.ecommerce.service.util.SecurityUtil;
