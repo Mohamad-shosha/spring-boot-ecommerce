@@ -25,7 +25,7 @@ public interface VDRServiceClient {
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.IMAGE_JPEG_VALUE
     )
-    ResponseEntity<Resource>  generate(
+    ResponseEntity<Resource> generate(
             @RequestPart("user") MultipartFile person,
             @RequestPart("cloth") MultipartFile cloth
     );
